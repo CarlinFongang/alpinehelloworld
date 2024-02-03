@@ -1,4 +1,5 @@
-FROM python:3.13.0a2-alpine
+ARG version="3.13.0a2-alpine"
+FROM python:$version
 
 # Install python and pip
 RUN apk add --no-cache --update python3 py3-pip bash
