@@ -1,6 +1,9 @@
 ARG version="3.13.0a2-alpine"
 FROM python:$version
 
+# cleanup
+RUN rm -rf ./webapp/*
+
 # Install python and pip
 RUN apk add --no-cache --update python3 py3-pip bash
 ADD ./webapp/requirements.txt /tmp/requirements.txt
