@@ -7,7 +7,7 @@ pipeline {
         IP_ADDRESS = "44.222.148.16"
     }
     agent none
-    stage {
+    stages {
         stage('Build image') {
             agent any
             step {
