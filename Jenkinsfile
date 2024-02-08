@@ -34,8 +34,7 @@ pipeline {
                 script {
                     sh '''
                         curl -I http://$IP_ADDRESS:80 && curl http://localhost:80 | grep -i "Hello world!"
-                    '''
-                    
+                    '''  
                 }
             }
         }
@@ -44,7 +43,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker stop $IMAGE_NAME && docker rm $IMAGE_NAME
+                        docker stop $IMAGE_NAME 
+                        docker rm $IMAGE_NAME
                     '''
                     
                 }
@@ -62,7 +62,7 @@ pipeline {
                 script {
                     sh '''
                         heroku container:login
-                        heroku create $TAGING || echo "project already exist"
+                        heroku create $STAGING || echo "project already exist"
                         heroku container:push -a $STAGING web
                         heroku container:release -a $STAGING web 
                     '''
