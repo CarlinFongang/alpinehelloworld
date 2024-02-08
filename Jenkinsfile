@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl -I http://IP_ADDRESS:80 | grep -i "Hello World!"
+                        curl -I http://$IP_ADDRESS:80 && curl http://localhost:80 | grep -i "Hello world!"
                     '''
                     
                 }
