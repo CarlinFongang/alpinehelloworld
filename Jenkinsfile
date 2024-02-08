@@ -1,5 +1,5 @@
 pipeline {
-    environnement {
+    environment {
         IMAGE_NAME = "alpinehelloworld"
         IMAGE_TAG = "latest"
         STAGING = "Carlinfg-staging"
@@ -12,8 +12,7 @@ pipeline {
             agent any
             step {
                 script {
-                    sh 'docker build -t carlfg/$IMAGE_NAME:$IMAGE_TAG .'
-                    
+                    sh 'docker build -t Carlinfg/$IMAGE_NAME:$IMAGE_TAG .'  
                 }
             }
         }
@@ -22,7 +21,7 @@ pipeline {
             step {
                 script {
                     sh '''
-                        docker run -d --name $IMAGE_NAME -p 80:5000 -e PORT=5000 carlfg/$IMAGE_NAME:$IMAGE_TAG
+                        docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 Carlinfg/$IMAGE_NAME:$IMAGE_TAG
                         sleep 5
                     '''
                     
@@ -56,7 +55,7 @@ pipeline {
                 expression { GIT_BRANCH == 'origin/master'}
             }
             agent any
-            environnement {
+            environment {
                 HEROKU_API_KEY = credentials('HEROKU_API_KEY')
             }
             step {
@@ -76,7 +75,7 @@ pipeline {
                 expression { GIT_BRANCH == 'origin/master'}
             }
             agent any
-            environnement {
+            environment {
                 HEROKU_API_KEY = credentials('HEROKU_API_KEY')
             }
             step {
