@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build image') {
             agent any
-            step {
+            steps {
                 script {
                     sh 'docker build -t Carlinfg/$IMAGE_NAME:$IMAGE_TAG .'  
                 }
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Run container based on builded image') {
             agent any
-            step {
+            steps {
                 script {
                     sh '''
                         docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 Carlinfg/$IMAGE_NAME:$IMAGE_TAG
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Test image') {
             agent any
-            step {
+            steps {
                 script {
                     sh '''
                         curl -I http://IP_ADDRESS:80 | grep -i "Hello World!"
@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Clean test') {
             agent any
-            step {
+            steps {
                 script {
                     sh '''
                         docker stop $IMAGE_NAME && docker rm $IMAGE_NAME
@@ -58,7 +58,7 @@ pipeline {
             environment {
                 HEROKU_API_KEY = credentials('HEROKU_API_KEY')
             }
-            step {
+            steps {
                 script {
                     sh '''
                         heroku container:login
@@ -78,7 +78,7 @@ pipeline {
             environment {
                 HEROKU_API_KEY = credentials('HEROKU_API_KEY')
             }
-            step {
+            steps {
                 script {
                     sh '''
                         heroku container:login
