@@ -2,9 +2,9 @@ pipeline {
     environment {
         IMAGE_NAME = "alpinehelloworld"
         IMAGE_TAG = "latest"
-        STAGING = "carlinfg-staging"
-        PRODUCTION = "carlinfg-production"
-        IP_ADDRESS = "44.222.148.16"
+        STAGING = "${BUILD_ID}-staging"
+        PRODUCTION = "${BUILD_ID}-production"
+        IP_ADDRESS = "44.200.39.13"
     }
     agent none
     stages {
@@ -12,7 +12,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    sh 'docker build -t carlfg/$IMAGE_NAME:$IMAGE_TAG .'  
+                    sh 'docker build -t ${BUILD_ID}/$IMAGE_NAME:$IMAGE_TAG .'  
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 carlfg/$IMAGE_NAME:$IMAGE_TAG
+                        docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 ${BUILD_ID}/$IMAGE_NAME:$IMAGE_TAG
                         sleep 5
                     '''
                     
