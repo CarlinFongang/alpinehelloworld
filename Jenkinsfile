@@ -4,7 +4,7 @@ pipeline {
         IMAGE_TAG = "latest"
         STAGING = "carlinfg-staging"
         PRODUCTION = "carlinfg-production"
-        IP_ADDRESS = "44.200.39.13"
+        IP_ADDRESS = "44.204.207.189"
     }
     agent none
     stages {
