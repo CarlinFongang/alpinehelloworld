@@ -2,8 +2,8 @@ pipeline {
     environment {
         IMAGE_NAME = "alpinehelloworld"
         IMAGE_TAG = "latest"
-        STAGING = "${BUILD_ID}-staging"
-        PRODUCTION = "${BUILD_ID}-production"
+        STAGING = "carlinfg-staging"
+        PRODUCTION = "carlinfg-production"
         IP_ADDRESS = "44.200.39.13"
     }
     agent none
@@ -12,7 +12,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    sh 'docker build -t ${BUILD_ID}/$IMAGE_NAME:$IMAGE_TAG .'  
+                    sh 'docker build -t carlfg/$IMAGE_NAME:$IMAGE_TAG .'  
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 ${BUILD_ID}/$IMAGE_NAME:$IMAGE_TAG
+                        docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 carlfg/$IMAGE_NAME:$IMAGE_TAG
                         sleep 5
                     '''
                     
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        npm install -g heroku
+                        npm i -g heroku@7.68.0
                         heroku container:login
                         heroku create $STAGING || echo "project already exist"
                         heroku container:push -a $STAGING web
