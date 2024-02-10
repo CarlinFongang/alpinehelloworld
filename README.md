@@ -15,5 +15,7 @@ Email : fongangcarlin@gmail.com
 
 _______
 
-<img width="950" alt="image" src="https://github.com/CarlinFongang/alpinehelloworld/assets/45420769/f118ba37-2091-49a6-95bb-3bf29b25c9da">
+[![Build Status](http://44.222.244.69:8080/buildStatus/icon?job=alpinehelloworld)](http://44.222.244.69:8080/job/alpinehelloworld/)
+
+
 
