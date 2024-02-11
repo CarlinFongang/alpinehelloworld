@@ -98,18 +98,6 @@ pipeline {
             script {
                 slackNotifier currentBuild.result
       }
-        // Suppression du déploiement en staging après 10 minutes
-        timeout(time: 10, unit: 'MINUTES') {
-            script {
-                sh "heroku pipelines:destroy $STAGING --confirm $STAGING"
-            }
-        }
-        // Suppression du déploiement en production après 10 minutes
-        timeout(time: 10, unit: 'MINUTES') {
-            script {
-                sh "heroku pipelines:destroy $PRODUCTION --confirm $PRODUCTION"
-            }
-        }
     }  
-  }
+  } 
 }
