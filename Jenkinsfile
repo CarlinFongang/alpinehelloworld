@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl -I "http://$IP_ADDRESS:80"
+                        curl -I "http://$IP_ADDRESS"
                     '''  
                 }
             }
