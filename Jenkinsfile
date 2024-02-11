@@ -101,7 +101,7 @@ pipeline {
                 steps {
                     script {
                         sh '''
-                        sleep 1800
+                        sleep 180
                         heroku apps:destroy --app $STAGING --confirm $STAGING
                         heroku apps:destroy --app $PRODUCTION --confirm $PRODUCTION
                         '''
