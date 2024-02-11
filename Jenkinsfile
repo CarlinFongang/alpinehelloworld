@@ -1,3 +1,6 @@
+/* import shared library */
+@Library('carlinfg-shared-library')_
+
 pipeline {
     environment {
         IMAGE_NAME = "alpinehelloworld"
@@ -101,7 +104,7 @@ pipeline {
                 steps {
                     script {
                         sh '''
-                        sleep 180
+                        sleep 900
                         heroku apps:destroy --app $STAGING --confirm $STAGING
                         heroku apps:destroy --app $PRODUCTION --confirm $PRODUCTION
                         '''
@@ -109,4 +112,12 @@ pipeline {
                 }
             }
     }
+    post {
+        always {
+            script {
+                slackNotifier currentBuild.result
+      }
+    }  
+  }
+
 }
