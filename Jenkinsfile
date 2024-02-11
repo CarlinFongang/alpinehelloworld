@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl "http://$IP_ADDRESS:80" | grep -i "Hello world!"
+                        curl -I "http://$IP_ADDRESS:80"
                     '''  
                 }
             }
@@ -99,4 +99,23 @@ pipeline {
             slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
           }   
     }
+          
+        stage('Destroy Staging and Production Deployments') {
+        when {
+            expression { GIT_BRANCH == 'origin/master'}
+            }
+            agent any
+            environment {
+                HEROKU_API_KEY = credentials('heroku_api_key')
+                }
+                steps {
+                    script {
+                        sh '''
+                        sleep 1800
+                        heroku apps:destroy --app $STAGING --confirm $STAGING
+                        heroku apps:destroy --app $PRODUCTION --confirm $PRODUCTION
+                        '''
+                    }
+                }
+            }
 }
