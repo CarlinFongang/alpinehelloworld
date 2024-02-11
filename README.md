@@ -13,6 +13,7 @@ Email : fongangcarlin@gmail.com
 >
 >[LinkedIn](https://www.linkedin.com/in/carlinfongang/) | [GitLab](https://gitlab.com/carlinfongang) | [GitHub](https://githut.com/carlinfongang) | [Credly](https://www.credly.com/users/carlin-fongang/badges)
 
+Jenkins implémentation [here](https://gitlab.com/CarlinFongang-Labs/jenkins-cicd/lab7-test-fonctionnement.git)
 _______
 
 [![Build Status](http://44.222.244.69:8080/buildStatus/icon?job=alpinehelloworld)](http://44.222.244.69:8080/job/alpinehelloworld/)
