@@ -100,4 +100,24 @@ pipeline {
       }
     }  
   }
+      stages {
+        stage('Destroy Staging and Production Deployments') {
+        when {
+            expression { GIT_BRANCH == 'origin/master'}
+            }
+            agent any
+            environment {
+                HEROKU_API_KEY = credentials('heroku_api_key')
+                }
+                steps {
+                    script {
+                        sh '''
+                        sleep 900
+                        heroku apps:destroy --app $STAGING --confirm $STAGING
+                        heroku apps:destroy --app $PRODUCTION --confirm $PRODUCTION
+                        '''
+                    }
+                }
+            }
+        }
 }
