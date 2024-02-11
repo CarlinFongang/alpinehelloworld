@@ -1,5 +1,3 @@
-# Jenkins | Test fonctionnement
-
 [Please find the specifications by clicking](https://github.com/eazytraining/)
 
 ------------
